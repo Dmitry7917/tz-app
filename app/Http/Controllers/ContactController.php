@@ -25,55 +25,11 @@ class ContactController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        $t0 = microtime(true);
-        $this->kek2();
-        $t1 = microtime(true);
-
-        $t_range = $t1 - $t0;
-
-        dd($t_range);
-
         return ContactResource::collection(
             $this->repository
                 ->where('user_id', \Auth::user()?->id)
                 ->paginate(\request()->get('limit') ?? 25)
         );
-    }
-
-    private function kek2($count = 1, $number = 1)
-    {
-        $i = $count;
-
-        while(--$i) {
-            echo $number . ' ';
-            $number++;
-
-            if ($number > 100) {
-                return;
-            }
-        }
-
-        echo '<br>';
-
-        $this->kek2(++$count, $number);
-    }
-
-    private function kek()
-    {
-        $count = 1;
-        $number = 1;
-
-        for(;$number < 100;) {
-            $j = $count;
-
-            while(--$j) {
-                echo $number . ' ';
-                $number++;
-            }
-
-            $count++;
-            echo '<br>';
-        }
     }
 
     /**
